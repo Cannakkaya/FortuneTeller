@@ -1,0 +1,1 @@
+ /Users/can/Desktop/gitAItarot/.dart_tool/flutter_build/d92e452540c984766a2447d8e3ced12a/native_assets.yaml: 

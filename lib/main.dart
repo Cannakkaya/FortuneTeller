@@ -28,7 +28,7 @@ class TarotPredictionScreen extends StatefulWidget {
 class _TarotPredictionScreenState extends State<TarotPredictionScreen> {
   final TextEditingController _infoController = TextEditingController();
   String _prediction = "";
-  String _selectedCard = "The Fool"; // Varsayılan kart
+  String _selectedCard = ""; // Varsayılan kart yok
 
   // Flask API'ye veri gönderme
   Future<void> getPrediction(String userInput, String selectedCard) async {
@@ -49,7 +49,9 @@ class _TarotPredictionScreenState extends State<TarotPredictionScreen> {
           _prediction = data['prediction'];
         });
       } else {
-        throw Exception('Failed to get prediction');
+        setState(() {
+          _prediction = 'Error: ${response.statusCode}';
+        });
       }
     } catch (error) {
       setState(() {
@@ -65,7 +67,23 @@ class _TarotPredictionScreenState extends State<TarotPredictionScreen> {
     'The High Priestess',
     'The Empress',
     'The Emperor',
-    // Diğer kartları buraya ekleyebilirsiniz.
+    'The Hierophant',
+    'The Lovers',
+    'The Chariot',
+    'Strength',
+    'The Hermit',
+    'Wheel of Fortune',
+    'Justice',
+    'The Hanged Man',
+    'Death',
+    'Temperance',
+    'The Devil',
+    'The Tower',
+    'The Star',
+    'The Moon',
+    'The Sun',
+    'Judgement',
+    'The World',
   ];
 
   @override
@@ -82,26 +100,59 @@ class _TarotPredictionScreenState extends State<TarotPredictionScreen> {
               decoration: InputDecoration(labelText: "Enter your information"),
             ),
             SizedBox(height: 20),
-            // Kart seçimi
-            DropdownButton<String>(
-              value: _selectedCard,
-              onChanged: (String? newValue) {
-                setState(() {
-                  _selectedCard = newValue!;
-                });
-              },
-              items: cards.map<DropdownMenuItem<String>>((String card) {
-                return DropdownMenuItem<String>(
-                  value: card,
-                  child: Text(card),
+
+            // Kartlar Animasyonu - Kapalı Kartlar
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: cards.map((card) {
+                return GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      _selectedCard = card; // Kart seçildiğinde kaydedilir
+                    });
+                  },
+                  child: AnimatedSwitcher(
+                    duration: Duration(milliseconds: 300),
+                    child: _selectedCard == card
+                        ? Container(
+                            key: ValueKey(card),
+                            height: 150,
+                            width: 100,
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage(
+                                    'assets/${card}.png'), // Kartın açılmış halini göster
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          )
+                        : Container(
+                            key: ValueKey(card),
+                            height: 150,
+                            width: 100,
+                            decoration: BoxDecoration(
+                              color: Colors.blue,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
+                  ),
                 );
               }).toList(),
             ),
             SizedBox(height: 20),
+
             // Tahmin butonu
             ElevatedButton(
               onPressed: () {
-                getPrediction(_infoController.text, _selectedCard);
+                if (_infoController.text.isNotEmpty &&
+                    _selectedCard.isNotEmpty) {
+                  getPrediction(_infoController.text, _selectedCard);
+                } else {
+                  setState(() {
+                    _prediction =
+                        "Please fill in your information and select a card!";
+                  });
+                }
               },
               child: Text("Get Prediction"),
             ),

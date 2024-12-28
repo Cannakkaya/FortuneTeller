@@ -8,34 +8,35 @@ CORS(app)
 
 # Örnek model - burada daha gelişmiş bir model kullanabilirsiniz
 model = LogisticRegression()
+
+# Bu, modelin eğitileceği örnek veri setidir. Gerçek verilerle değiştirilmelidir.
 X = np.array([[0], [1], [2], [3]])
 y = np.array([0, 1, 1, 0])
 model.fit(X, y)
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    data = request.get_json()
-    # Kullanıcı verilerini ve seçilen kartları kullanarak tahmin yapın
-    # Bu örnekte basit bir model kullanılıyor, ancak kendi modelinizi ekleyebilirsiniz
-    user_input = np.array([data['input']]).reshape(-1, 1)
-    prediction = model.predict(user_input)
-    response = {
-        'prediction': int(prediction[0])
-    }
-    return jsonify(response)
+    try:
+        data = request.get_json()
+        # Kullanıcı bilgilerini ve kart seçimlerini al
+        user_input = data['user_input']
+        selected_card = data['selected_card']
+
+        # Modeli burada kullanın. Bu örnek sadece bir simülasyon yapıyor.
+        # Gerçek modeliniz için kullanıcı bilgilerini ve kart bilgisini daha iyi işleyebilirsiniz.
+        prediction = model.predict(np.array([[len(user_input)]]))  # Basit bir tahmin örneği
+
+        # Seçilen kart bilgisini burada bir şekilde kullanabilirsiniz
+        # Örneğin: card_info = get_card_info(selected_card)
+
+        response = {
+            'prediction': f'Tahmin: {int(prediction[0])}, Kart: {selected_card}'
+        }
+        return jsonify(response)
+    except KeyError:
+        return jsonify({'error': 'Invalid input, "user_input" and "selected_card" are required.'}), 400
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-@app.route('/predict', methods=['POST'])
-def predict():
-    try:
-        data = request.get_json()
-        user_input = np.array([data['input']]).reshape(-1, 1)
-        prediction = model.predict(user_input)
-        response = {'prediction': int(prediction[0])}
-        return jsonify(response)
-    except KeyError:
-        return jsonify({'error': 'Invalid input, "input" key is required.'}), 400
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
