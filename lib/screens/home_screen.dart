@@ -3,6 +3,8 @@ import 'package:tarot_app/services/api_service.dart';
 import 'package:tarot_app/services/api_service.dart';
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }

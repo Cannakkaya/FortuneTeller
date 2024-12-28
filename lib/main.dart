@@ -1,86 +1,113 @@
 import 'package:flutter/material.dart';
-import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Tarot Fortune Teller',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+        primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: const HomeScreen(),
+      home: TarotPredictionScreen(),
     );
   }
 }
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
-
+class TarotPredictionScreen extends StatefulWidget {
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  _TarotPredictionScreenState createState() => _TarotPredictionScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
-  final TextEditingController _controller = TextEditingController();
-  String predictionResult = '';
+class _TarotPredictionScreenState extends State<TarotPredictionScreen> {
+  final TextEditingController _infoController = TextEditingController();
+  String _prediction = "";
+  String _selectedCard = "The Fool"; // Varsayılan kart
 
-  Future<void> fetchPrediction(int input) async {
-    final response = await http.post(
-      Uri.parse('http://127.0.0.1:5000/predict'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode(<String, int>{'input': input}),
-    );
+  // Flask API'ye veri gönderme
+  Future<void> getPrediction(String userInput, String selectedCard) async {
+    final url =
+        Uri.parse('http://127.0.0.1:5000/predict'); // Flask API endpoint
 
-    if (response.statusCode == 200) {
-      final Map<String, dynamic> data = jsonDecode(response.body);
+    try {
+      final response = await http.post(url,
+          body: json.encode({
+            'user_input': userInput,
+            'selected_card': selectedCard,
+          }),
+          headers: {'Content-Type': 'application/json'});
+
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        setState(() {
+          _prediction = data['prediction'];
+        });
+      } else {
+        throw Exception('Failed to get prediction');
+      }
+    } catch (error) {
       setState(() {
-        predictionResult = data['prediction'].toString();
+        _prediction = 'Error: $error';
       });
-    } else {
-      throw Exception('Failed to load prediction');
     }
   }
+
+  // Kartlar listesi
+  List<String> cards = [
+    'The Fool',
+    'The Magician',
+    'The High Priestess',
+    'The Empress',
+    'The Emperor',
+    // Diğer kartları buraya ekleyebilirsiniz.
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Flutter AI Tarot App'),
-      ),
+      appBar: AppBar(title: Text("Tarot Prediction")),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            // Kullanıcı bilgisi girişi
             TextField(
-              controller: _controller,
-              keyboardType: TextInputType.number,
-              decoration: const InputDecoration(labelText: 'Kullanıcı Girdisi'),
+              controller: _infoController,
+              decoration: InputDecoration(labelText: "Enter your information"),
             ),
-            const SizedBox(height: 16.0),
+            SizedBox(height: 20),
+            // Kart seçimi
+            DropdownButton<String>(
+              value: _selectedCard,
+              onChanged: (String? newValue) {
+                setState(() {
+                  _selectedCard = newValue!;
+                });
+              },
+              items: cards.map<DropdownMenuItem<String>>((String card) {
+                return DropdownMenuItem<String>(
+                  value: card,
+                  child: Text(card),
+                );
+              }).toList(),
+            ),
+            SizedBox(height: 20),
+            // Tahmin butonu
             ElevatedButton(
               onPressed: () {
-                final int input = int.parse(_controller.text);
-                fetchPrediction(input);
+                getPrediction(_infoController.text, _selectedCard);
               },
-              child: const Text('Tahmin Al'),
+              child: Text("Get Prediction"),
             ),
-            const SizedBox(height: 16.0),
-            Text(
-              'Tahmin Sonucu: $predictionResult',
-              style: const TextStyle(fontSize: 20),
-            ),
+            SizedBox(height: 20),
+            // Sonuç
+            Text("Prediction: $_prediction"),
           ],
         ),
       ),

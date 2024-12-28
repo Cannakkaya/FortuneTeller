@@ -26,3 +26,16 @@ def predict():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+@app.route('/predict', methods=['POST'])
+def predict():
+    try:
+        data = request.get_json()
+        user_input = np.array([data['input']]).reshape(-1, 1)
+        prediction = model.predict(user_input)
+        response = {'prediction': int(prediction[0])}
+        return jsonify(response)
+    except KeyError:
+        return jsonify({'error': 'Invalid input, "input" key is required.'}), 400
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
