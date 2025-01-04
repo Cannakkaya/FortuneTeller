@@ -1,36 +1,43 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from sklearn.linear_model import LogisticRegression
 import numpy as np
 
 app = Flask(__name__)
 CORS(app)
 
-# Örnek model - burada daha gelişmiş bir model kullanabilirsiniz
-model = LogisticRegression()
-
-# Bu, modelin eğitileceği örnek veri setidir. Gerçek verilerle değiştirilmelidir.
-X = np.array([[0], [1], [2], [3]])
-y = np.array([0, 1, 1, 0])
-model.fit(X, y)
+# Kart anlamları
+cards = {
+    "The Fool": "Yeni başlangıçlar, cesaret, tecrübesizlik ve fırsatlar.",
+    "The Magician": "Yaratıcılık, güçlü irade, beceri, manipülasyon.",
+    "The High Priestess": "Sezgi, içsel bilgi, gizli sırlar.",
+    "The Empress": "Bereket, doğa, annelik, duygusal büyüme.",
+    "The Lovers": "Aşk, ilişkiler, seçimler, uyum.",
+    "Death": "Bitişler, dönüşüm, yeni başlangıçlar, temizlenme.",
+    "The Devil": "Bağımlılık, tuzaklar, korkular, kontrol.",
+    "The Sun": "Başarı, mutluluk, neşe, aydınlanma.",
+    # Diğer kartları buraya ekleyebilirsiniz.
+}
 
 @app.route('/predict', methods=['POST'])
 def predict():
     try:
         data = request.get_json()
-        # Kullanıcı bilgilerini ve kart seçimlerini al
-        user_input = data['user_input']
-        selected_card = data['selected_card']
+        user_input = data['user_input']  # Kullanıcının adı veya başka bir bilgisi
+        selected_card = data['selected_card']  # Seçilen kart
 
-        # Modeli burada kullanın. Bu örnek sadece bir simülasyon yapıyor.
-        # Gerçek modeliniz için kullanıcı bilgilerini ve kart bilgisini daha iyi işleyebilirsiniz.
-        prediction = model.predict(np.array([[len(user_input)]]))  # Basit bir tahmin örneği
+        # Kartın anlamını al
+        card_meaning = cards.get(selected_card, "Bu kartın anlamı bulunamadı.")
 
-        # Seçilen kart bilgisini burada bir şekilde kullanabilirsiniz
-        # Örneğin: card_info = get_card_info(selected_card)
+        # Kartın özelliklerine göre gelişmiş bir yorum yapalım (örneğin: kişisel yorum, durum analizi vs.)
+        if selected_card == "Death":
+            prediction = f"{user_input} için kart seçildi: {selected_card}. Bu, bir dönüm noktası, eski alışkanlıklardan kurtulma ve yeni başlangıçlar anlamına gelir."
+        elif selected_card == "The Lovers":
+            prediction = f"{user_input} için kart seçildi: {selected_card}. Bu kart, ilişkilerdeki uyumu ve önemli seçimleri işaret eder."
+        else:
+            prediction = f"{user_input} için kart seçildi: {selected_card}. Yorum: {card_meaning}"
 
         response = {
-            'prediction': f'Tahmin: {int(prediction[0])}, Kart: {selected_card}'
+            'prediction': prediction
         }
         return jsonify(response)
     except KeyError:
