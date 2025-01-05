@@ -10,11 +10,11 @@
 		</data>
 		<key>flutter_assets/AssetManifest.bin</key>
 		<data>
-		P4FMs5z9HHT4560aJIw3edV/E6U=
+		2s4/1Uh3eHqtdrDg3Lf2UsESpt8=
 		</data>
 		<key>flutter_assets/AssetManifest.json</key>
 		<data>
-		DHKRCLGY8qCIKYW+eJqLNLiPP+E=
+		4eut6wS5purwT1AyYpP2aSXNB6U=
 		</data>
 		<key>flutter_assets/FontManifest.json</key>
 		<data>
@@ -22,11 +22,35 @@
 		</data>
 		<key>flutter_assets/NOTICES.Z</key>
 		<data>
-		c1WnYBvVQd5MCGQEHAdIkVqakZ8=
+		KX/EgegrpnWQcOPmgI2LX1RSU/o=
+		</data>
+		<key>flutter_assets/assets/tarot/images/burc.png</key>
+		<data>
+		EiM/GMCFXYDv3SlskfNvU0FwG70=
+		</data>
+		<key>flutter_assets/assets/tarot/images/coffeefortune.png</key>
+		<data>
+		v5a62/rdlm7RhiQOLdZWcMocrUE=
+		</data>
+		<key>flutter_assets/assets/tarot/images/livetarot.png</key>
+		<data>
+		l30smkfSR+ogGJLZHaTOowNEdxA=
+		</data>
+		<key>flutter_assets/assets/tarot/images/mainscreen1.png</key>
+		<data>
+		sSVnfBHDeqDfeBZ6xutQW8/g5Fc=
 		</data>
 		<key>flutter_assets/assets/tarot/images/mainscreenbg.png</key>
 		<data>
 		Of9cR0bNvluirVcefpunx2ENKW8=
+		</data>
+		<key>flutter_assets/assets/tarot/images/tarotai.png</key>
+		<data>
+		1F99qTbSHytJVRg/t031bSHa6XQ=
+		</data>
+		<key>flutter_assets/assets/tarot/images/tarotcardsbg.png</key>
+		<data>
+		5/XNVC27JaeYcPuEa+ASXcuMGwY=
 		</data>
 		<key>flutter_assets/fonts/MaterialIcons-Regular.otf</key>
 		<data>
@@ -38,7 +62,7 @@
 		</data>
 		<key>flutter_assets/kernel_blob.bin</key>
 		<data>
-		hlwwibl85gJD39HTV3eCpeW4dcY=
+		ln7HvpgMEy0maxe2CSkNNFh2arM=
 		</data>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
 		<data>
@@ -59,14 +83,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			MnagMiIXWIibUXyWYiLx776Jq1C0lYvdQYKAbONIwfY=
+			4AHeOpzpD7K/FAUjo2wB5sTOSJ8xGNocoZCczxCfLws=
 			</data>
 		</dict>
 		<key>flutter_assets/AssetManifest.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			OfFltEkhJARQ6t1IuoB2WT3bLShrqnMUfM6MF/yCiWI=
+			nW+PS0A2XYEShGZEcVD4WmCQOTHrW9dGqytmIWzc+I4=
 			</data>
 		</dict>
 		<key>flutter_assets/FontManifest.json</key>
@@ -80,7 +104,35 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			poI+gGyap7k17UeSSdrAN5Wk1A6C34v9oJrDTc9g9kc=
+			eeJRxdxRU41LyS/S3xAobtCklDaGcpEb1sd2EETbj3I=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/tarot/images/burc.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			jON1B7BTJi5cMICfmzPErWmLJwuPQ8QDav5465WRm4U=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/tarot/images/coffeefortune.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			DvL5V/s+ywRPdbDIpt6GZUWxASNSazhlf+ZDYNBPCiM=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/tarot/images/livetarot.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			1XFN7gX2C+bAo0fej0nUjo+eASlkhDMyIkVGMUuf9YM=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/tarot/images/mainscreen1.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			W4nrvZvjWThYY2dnmSh3eEgUeD7Vuxl6IGqzuWT2Prs=
 			</data>
 		</dict>
 		<key>flutter_assets/assets/tarot/images/mainscreenbg.png</key>
@@ -88,6 +140,20 @@
 			<key>hash2</key>
 			<data>
 			q/2Ncq++90G5WjAfeqN8N582htHRawB5mz7Z3DIovNo=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/tarot/images/tarotai.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			ufNkYrync+2vuNkW0fd08p/ztBmWNUTxHXoaQfTm/34=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/tarot/images/tarotcardsbg.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			iFE+Jp0D4/UdoVlT52/QQKnGcJJCnTQAYUuiOHWkVWQ=
 			</data>
 		</dict>
 		<key>flutter_assets/fonts/MaterialIcons-Regular.otf</key>
@@ -108,7 +174,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			oc4RMz9BvtYjD6gw1lLvTGlom7EH4QHemnx2E14vPKU=
+			+U8iw+JM3M10NkOEZ743eAE+GgNhIui7sbSmTatXaoQ=
 			</data>
 		</dict>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>

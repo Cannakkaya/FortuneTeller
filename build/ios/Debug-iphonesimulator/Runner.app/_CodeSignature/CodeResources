@@ -46,7 +46,7 @@
 		</data>
 		<key>Frameworks/App.framework/App</key>
 		<data>
-		2b+2I6pUBQI1bkmU5zeHDslHQKo=
+		sUPjuwde7rgyrd3dPRayHolEFNY=
 		</data>
 		<key>Frameworks/App.framework/Info.plist</key>
 		<data>
@@ -54,15 +54,15 @@
 		</data>
 		<key>Frameworks/App.framework/_CodeSignature/CodeResources</key>
 		<data>
-		y11mTD6xQRJK4zhhMaqIdBzgBEw=
+		uB4D2+uVGDzzu+/mMHkVCezwn6U=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.bin</key>
 		<data>
-		P4FMs5z9HHT4560aJIw3edV/E6U=
+		2s4/1Uh3eHqtdrDg3Lf2UsESpt8=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.json</key>
 		<data>
-		DHKRCLGY8qCIKYW+eJqLNLiPP+E=
+		4eut6wS5purwT1AyYpP2aSXNB6U=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/FontManifest.json</key>
 		<data>
@@ -70,11 +70,35 @@
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/NOTICES.Z</key>
 		<data>
-		c1WnYBvVQd5MCGQEHAdIkVqakZ8=
+		KX/EgegrpnWQcOPmgI2LX1RSU/o=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/assets/tarot/images/burc.png</key>
+		<data>
+		EiM/GMCFXYDv3SlskfNvU0FwG70=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/assets/tarot/images/coffeefortune.png</key>
+		<data>
+		v5a62/rdlm7RhiQOLdZWcMocrUE=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/assets/tarot/images/livetarot.png</key>
+		<data>
+		l30smkfSR+ogGJLZHaTOowNEdxA=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/assets/tarot/images/mainscreen1.png</key>
+		<data>
+		sSVnfBHDeqDfeBZ6xutQW8/g5Fc=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/assets/tarot/images/mainscreenbg.png</key>
 		<data>
 		Of9cR0bNvluirVcefpunx2ENKW8=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/assets/tarot/images/tarotai.png</key>
+		<data>
+		1F99qTbSHytJVRg/t031bSHa6XQ=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/assets/tarot/images/tarotcardsbg.png</key>
+		<data>
+		5/XNVC27JaeYcPuEa+ASXcuMGwY=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/fonts/MaterialIcons-Regular.otf</key>
 		<data>
@@ -86,7 +110,7 @@
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/kernel_blob.bin</key>
 		<data>
-		hlwwibl85gJD39HTV3eCpeW4dcY=
+		ln7HvpgMEy0maxe2CSkNNFh2arM=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
 		<data>
@@ -192,6 +216,26 @@
 		<data>
 		ipm8hg7aB3LzsfShJfpNR0QQ4hw=
 		</data>
+		<key>Frameworks/image_picker_ios.framework/Info.plist</key>
+		<data>
+		kGbHP6DGd636e4b9SWU4YlovNzc=
+		</data>
+		<key>Frameworks/image_picker_ios.framework/_CodeSignature/CodeResources</key>
+		<data>
+		h9nH5wR1Tpm8QJmfaGi1xC/wsLg=
+		</data>
+		<key>Frameworks/image_picker_ios.framework/image_picker_ios</key>
+		<data>
+		rAA7LaLFcOk+5UelJrAjgs7wcqk=
+		</data>
+		<key>Frameworks/image_picker_ios.framework/image_picker_ios_privacy.bundle/Info.plist</key>
+		<data>
+		XKEH7ZWKM1SKvp+1CILFUabYjyw=
+		</data>
+		<key>Frameworks/image_picker_ios.framework/image_picker_ios_privacy.bundle/PrivacyInfo.xcprivacy</key>
+		<data>
+		/LX0ZlwxwIAIhjZaDB8EiH5KpXA=
+		</data>
 		<key>Info.plist</key>
 		<data>
 		qkzdAhEVcE6J77DtR1lvJ6OKCsg=
@@ -277,7 +321,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Q5U3BSUzCDEo/xYkkaCgrskmFXYS4CZZaXsjOlFarTg=
+			qi5PfCfGQFYJxvelD7giKh9cYzobfj2bT8LJsRvhAV4=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/Info.plist</key>
@@ -291,21 +335,21 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			izeLUw0GGNtFsAsiFeKa6FvDgvbyfjrwWV4ahHU1kbw=
+			eGEtlLjiJ7MObxSwreFJm7bjwLh2nDnt6zP9EUxd2Ho=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.bin</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			MnagMiIXWIibUXyWYiLx776Jq1C0lYvdQYKAbONIwfY=
+			4AHeOpzpD7K/FAUjo2wB5sTOSJ8xGNocoZCczxCfLws=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			OfFltEkhJARQ6t1IuoB2WT3bLShrqnMUfM6MF/yCiWI=
+			nW+PS0A2XYEShGZEcVD4WmCQOTHrW9dGqytmIWzc+I4=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/FontManifest.json</key>
@@ -319,7 +363,35 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			poI+gGyap7k17UeSSdrAN5Wk1A6C34v9oJrDTc9g9kc=
+			eeJRxdxRU41LyS/S3xAobtCklDaGcpEb1sd2EETbj3I=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/assets/tarot/images/burc.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			jON1B7BTJi5cMICfmzPErWmLJwuPQ8QDav5465WRm4U=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/assets/tarot/images/coffeefortune.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			DvL5V/s+ywRPdbDIpt6GZUWxASNSazhlf+ZDYNBPCiM=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/assets/tarot/images/livetarot.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			1XFN7gX2C+bAo0fej0nUjo+eASlkhDMyIkVGMUuf9YM=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/assets/tarot/images/mainscreen1.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			W4nrvZvjWThYY2dnmSh3eEgUeD7Vuxl6IGqzuWT2Prs=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/assets/tarot/images/mainscreenbg.png</key>
@@ -327,6 +399,20 @@
 			<key>hash2</key>
 			<data>
 			q/2Ncq++90G5WjAfeqN8N582htHRawB5mz7Z3DIovNo=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/assets/tarot/images/tarotai.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			ufNkYrync+2vuNkW0fd08p/ztBmWNUTxHXoaQfTm/34=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/assets/tarot/images/tarotcardsbg.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			iFE+Jp0D4/UdoVlT52/QQKnGcJJCnTQAYUuiOHWkVWQ=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/fonts/MaterialIcons-Regular.otf</key>
@@ -347,7 +433,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			oc4RMz9BvtYjD6gw1lLvTGlom7EH4QHemnx2E14vPKU=
+			+U8iw+JM3M10NkOEZ743eAE+GgNhIui7sbSmTatXaoQ=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
@@ -530,6 +616,41 @@
 			<key>hash2</key>
 			<data>
 			wSU3Ai74GJkae/7UGnbY1q6WL/vA5lEax2Kl0IRef3w=
+			</data>
+		</dict>
+		<key>Frameworks/image_picker_ios.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			QYrec6GykzUvQkZZ86/JRxMYKAOlRyPuykNN4UQjLno=
+			</data>
+		</dict>
+		<key>Frameworks/image_picker_ios.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			NrVVmBKDuVc9v8mM5J/DB56zl+eBVdr6akB2p/2Ha10=
+			</data>
+		</dict>
+		<key>Frameworks/image_picker_ios.framework/image_picker_ios</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			IHwggXM10b8EQ5rzSY6V2cFVzfPX1FMMLzwy3nVeZWI=
+			</data>
+		</dict>
+		<key>Frameworks/image_picker_ios.framework/image_picker_ios_privacy.bundle/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			Eib63Pf/I/UET8YyKwF9wwVyW30c2qVEOXNaEivjHh8=
+			</data>
+		</dict>
+		<key>Frameworks/image_picker_ios.framework/image_picker_ios_privacy.bundle/PrivacyInfo.xcprivacy</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			bS2g2NkwIn1CjB2TY7CtbjoS4sm2jFzilxWKdBL8jDE=
 			</data>
 		</dict>
 	</dict>
