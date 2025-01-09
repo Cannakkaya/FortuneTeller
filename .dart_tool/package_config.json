@@ -123,9 +123,9 @@
     },
     {
       "name": "http",
-      "rootUri": "file:///Users/can/.pub-cache/hosted/pub.dev/http-0.13.6",
+      "rootUri": "file:///Users/can/.pub-cache/hosted/pub.dev/http-1.2.2",
       "packageUri": "lib/",
-      "languageVersion": "2.19"
+      "languageVersion": "3.3"
     },
     {
       "name": "http_parser",
@@ -350,7 +350,7 @@
       "languageVersion": "3.6"
     }
   ],
-  "generated": "2025-01-04T20:29:16.219487Z",
+  "generated": "2025-01-08T19:31:26.810209Z",
   "generator": "pub",
   "generatorVersion": "3.6.0",
   "flutterRoot": "file:///Users/can/development/flutter",

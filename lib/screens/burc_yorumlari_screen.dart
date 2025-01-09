@@ -8,8 +8,12 @@ class BurcYorumlariScreen extends StatefulWidget {
 }
 
 class _BurcYorumlariScreenState extends State<BurcYorumlariScreen> {
-  // Burç listesi
-  List<String> burclar = [
+  // API anahtarınız ve temel URL
+  final String apiKey = '38631292e8mshe03f500a696dd8bp12e82ajsnd77c89903a72';
+  final String baseUrl = 'https://horoscope-astrology.p.rapidapi.com/horoscope';
+
+  // Burç listesi (İngilizce adları)
+  final List<String> burclar = [
     "aries",
     "taurus",
     "gemini",
@@ -24,43 +28,48 @@ class _BurcYorumlariScreenState extends State<BurcYorumlariScreen> {
     "pisces"
   ];
 
-  Map<String, String> burcYorumlari = {}; // Her burç için yorumları saklayacak
+  // Burç yorumları
+  Map<String, String> burcYorumlari = {};
 
   @override
   void initState() {
     super.initState();
-    fetchBurcYorumlari(); // Burç yorumlarını çekiyoruz
+    fetchHoroscopeData();
   }
 
-  Future<void> fetchBurcYorumlari() async {
-    try {
-      for (String burc in burclar) {
-        final response = await http.post(
-          Uri.parse("https://aztro.sameerkumar.website/"),
+  // Burç yorumlarını çeken asenkron fonksiyon
+  Future<void> fetchHoroscopeData() async {
+    for (String burc in burclar) {
+      try {
+        final response = await http.get(
+          Uri.parse('$baseUrl?day=today&sunsign=$burc'),
           headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-          }, // Başlık eklendi
-          body: {'sign': burc, 'day': 'today'}, // Eksik parametreler eklendi
+            'x-rapidapi-key': apiKey,
+            'x-rapidapi-host': 'horoscope-astrology.p.rapidapi.com',
+          },
         );
 
+        // API yanıtını kontrol etme
         if (response.statusCode == 200) {
           final data = json.decode(response.body);
+          final String yorum = data['horoscope'] ?? "Yorum alınamadı.";
+
+          // State'i güncelleme
           setState(() {
-            burcYorumlari[burc] = data['description'] ??
-                "Yorum bulunamadı."; // Yorumları saklıyoruz
+            burcYorumlari[burc] = yorum;
           });
         } else {
-          print("Hata: ${response.statusCode} - ${response.body}");
+          print('Hata: ${response.statusCode} - ${response.body}');
           setState(() {
-            burcYorumlari[burc] = "Yorum yüklenemedi."; // Hata mesajı
+            burcYorumlari[burc] = "Yorum alınamadı.";
           });
         }
+      } catch (e) {
+        print('Hata oluştu: $e');
+        setState(() {
+          burcYorumlari[burc] = "Yorum alınamadı.";
+        });
       }
-    } catch (e) {
-      print("İstek sırasında hata oluştu: $e");
-      setState(() {
-        burcYorumlari = {for (var burc in burclar) burc: "Hata oluştu."};
-      });
     }
   }
 
@@ -70,28 +79,23 @@ class _BurcYorumlariScreenState extends State<BurcYorumlariScreen> {
       appBar: AppBar(
         title: Text("Günlük Burç Yorumları"),
       ),
-      body: Padding(
-        padding: EdgeInsets.all(16.0),
-        child: burcYorumlari.isEmpty
-            ? Center(
-                child: CircularProgressIndicator(), // Yükleniyor göstergesi
-              )
-            : ListView.builder(
-                itemCount: burclar.length,
-                itemBuilder: (context, index) {
-                  String burc = burclar[index];
-                  String burcAdi = _translateBurc(burc);
-                  return _buildBurcYorumu(
-                    burcAdi,
-                    burcYorumlari[burc] ?? "Yorum yükleniyor...",
-                  );
-                },
-              ),
-      ),
+      body: burcYorumlari.isEmpty
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : ListView.builder(
+              itemCount: burclar.length,
+              itemBuilder: (context, index) {
+                String burc = burclar[index];
+                String burcAdi = _translateBurc(burc);
+                String yorum = burcYorumlari[burc] ?? "Yorum yükleniyor...";
+                return _buildBurcCard(burcAdi, yorum);
+              },
+            ),
     );
   }
 
-  // API'den alınan İngilizce burç isimlerini Türkçeye çevirme
+  // Burçların Türkçe isimlerini çeviren fonksiyon
   String _translateBurc(String burc) {
     Map<String, String> burcMap = {
       "aries": "Koç",
@@ -105,35 +109,28 @@ class _BurcYorumlariScreenState extends State<BurcYorumlariScreen> {
       "sagittarius": "Yay",
       "capricorn": "Oğlak",
       "aquarius": "Kova",
-      "pisces": "Balık"
+      "pisces": "Balık",
     };
     return burcMap[burc] ?? burc;
   }
 
-  // Her burç için yorum widget'ı
-  Widget _buildBurcYorumu(String burcAdi, String yorum) {
+  // Burçları ve yorumları ekrana yazdıran Card widget'ı
+  Widget _buildBurcCard(String burcAdi, String yorum) {
     return Card(
-      margin: EdgeInsets.symmetric(vertical: 8.0),
-      elevation: 5,
+      margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               burcAdi,
-              style: TextStyle(
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold,
-              ),
+              style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 10.0),
             Text(
               yorum,
-              style: TextStyle(
-                fontSize: 16.0,
-                color: Colors.grey[700],
-              ),
+              style: TextStyle(fontSize: 16.0, color: Colors.grey[800]),
             ),
           ],
         ),

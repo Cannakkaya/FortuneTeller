@@ -67,9 +67,9 @@ flutter_plugin_android_lifecycle
 file:///Users/can/.pub-cache/hosted/pub.dev/flutter_plugin_android_lifecycle-2.0.24/
 file:///Users/can/.pub-cache/hosted/pub.dev/flutter_plugin_android_lifecycle-2.0.24/lib/
 http
-2.19
-file:///Users/can/.pub-cache/hosted/pub.dev/http-0.13.6/
-file:///Users/can/.pub-cache/hosted/pub.dev/http-0.13.6/lib/
+3.3
+file:///Users/can/.pub-cache/hosted/pub.dev/http-1.2.2/
+file:///Users/can/.pub-cache/hosted/pub.dev/http-1.2.2/lib/
 http_parser
 3.4
 file:///Users/can/.pub-cache/hosted/pub.dev/http_parser-4.1.1/
