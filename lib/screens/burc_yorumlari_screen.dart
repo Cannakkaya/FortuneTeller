@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:translator/translator.dart'; // Çeviri paketini ekliyoruz
 
 class BurcYorumlariScreen extends StatefulWidget {
   @override
@@ -30,6 +31,7 @@ class _BurcYorumlariScreenState extends State<BurcYorumlariScreen> {
 
   // Burç yorumları
   Map<String, String> burcYorumlari = {};
+  final translator = GoogleTranslator(); // Çeviri aracı
 
   @override
   void initState() {
@@ -54,9 +56,12 @@ class _BurcYorumlariScreenState extends State<BurcYorumlariScreen> {
           final data = json.decode(response.body);
           final String yorum = data['horoscope'] ?? "Yorum alınamadı.";
 
+          // Yorumun Türkçeye çevrilmesi
+          String translatedYorum = await translateToTurkish(yorum);
+
           // State'i güncelleme
           setState(() {
-            burcYorumlari[burc] = yorum;
+            burcYorumlari[burc] = translatedYorum;
           });
         } else {
           print('Hata: ${response.statusCode} - ${response.body}');
@@ -71,6 +76,12 @@ class _BurcYorumlariScreenState extends State<BurcYorumlariScreen> {
         });
       }
     }
+  }
+
+  // Yorumları Türkçeye çeviren asenkron fonksiyon
+  Future<String> translateToTurkish(String text) async {
+    var translation = await translator.translate(text, to: 'tr');
+    return translation.text;
   }
 
   @override

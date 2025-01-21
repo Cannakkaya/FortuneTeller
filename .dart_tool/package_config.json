@@ -314,6 +314,12 @@
       "languageVersion": "3.4"
     },
     {
+      "name": "translator",
+      "rootUri": "file:///Users/can/.pub-cache/hosted/pub.dev/translator-1.0.3+1",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
       "name": "typed_data",
       "rootUri": "file:///Users/can/.pub-cache/hosted/pub.dev/typed_data-1.4.0",
       "packageUri": "lib/",
@@ -350,7 +356,7 @@
       "languageVersion": "3.6"
     }
   ],
-  "generated": "2025-01-08T19:31:26.810209Z",
+  "generated": "2025-01-09T14:29:12.271489Z",
   "generator": "pub",
   "generatorVersion": "3.6.0",
   "flutterRoot": "file:///Users/can/development/flutter",
