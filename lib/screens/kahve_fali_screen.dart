@@ -1,6 +1,10 @@
 import 'dart:io'; // File işlemleri için gerekli import
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart'; // ImagePicker import
+import 'package:image_picker/image_picker.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert'; // JSON işleme için gerekli import
 
 class KahveFaliScreen extends StatefulWidget {
   @override
@@ -9,19 +13,139 @@ class KahveFaliScreen extends StatefulWidget {
 
 class _KahveFaliScreenState extends State<KahveFaliScreen> {
   final ImagePicker _picker = ImagePicker();
-  List<File> _selectedImages = []; // Seçilen resimleri tutmak için File listesi
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _birthDateController = TextEditingController();
+  List<File> _selectedImages = [];
+  bool _isSending = false;
 
   // Resim seçme işlemi
   Future<void> _pickImage() async {
-    // Resim seçme işlemi (galeriden)
+    if (_selectedImages.length >= 3) {
+      Fluttertoast.showToast(
+        msg: "En fazla 3 resim seçebilirsiniz!",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+      );
+      return;
+    }
+
     final XFile? pickedFile =
         await _picker.pickImage(source: ImageSource.gallery);
 
-    // Eğer kullanıcı resim seçtiyse
     if (pickedFile != null) {
       setState(() {
-        _selectedImages.add(File(pickedFile.path)); // XFile'dan File'a dönüşüm
+        _selectedImages.add(File(pickedFile.path));
       });
+    }
+  }
+
+  // OpenAI API'ye fal gönderme işlemi
+  Future<String> _getFortuneFromAI(String name, String birthDate) async {
+    try {
+      final apiKey = dotenv.env['OPENAI_API_KEY'];
+      if (apiKey == null || apiKey.isEmpty) {
+        throw Exception(
+            "API anahtarı bulunamadı. Lütfen .env dosyasını kontrol edin.");
+      }
+
+      final response = await http.post(
+        Uri.parse('https://api.openai.com/v1/completions'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $apiKey',
+        },
+        body: json.encode({
+          "model": "text-davinci-003", // OpenAI'nin GPT-3 modelini kullanıyoruz
+          "prompt":
+              "Kullanıcı adı: $name, Doğum tarihi: $birthDate. Bu kişi için bir kahve falı yorumu yap.",
+          "max_tokens": 100,
+          "temperature": 0.7,
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        return data['choices'][0]['text'].trim(); // Fal yorumu
+      } else {
+        throw Exception(
+            'API isteği başarısız oldu. Hata: ${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('OpenAI API isteği sırasında bir hata oluştu: $e');
+    }
+  }
+
+  // Fal gönderme işlemi
+  Future<void> _sendData() async {
+    if (_nameController.text.isEmpty || _birthDateController.text.isEmpty) {
+      Fluttertoast.showToast(
+        msg: "Lütfen tüm alanları doldurun!",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+      );
+      return;
+    }
+
+    if (_selectedImages.length < 3) {
+      Fluttertoast.showToast(
+        msg: "Lütfen 3 resim seçin!",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+      );
+      return;
+    }
+
+    setState(() {
+      _isSending = true;
+    });
+
+    try {
+      // OpenAI API'ye fal isteği gönderiyoruz
+      String fortune = await _getFortuneFromAI(
+          _nameController.text, _birthDateController.text);
+
+      // Fal yorumu geldiğinde
+      Fluttertoast.showToast(
+        msg: "Kahve falınız: $fortune",
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.BOTTOM,
+        backgroundColor: Colors.green,
+        textColor: Colors.white,
+      );
+
+      setState(() {
+        _selectedImages.clear();
+      });
+    } catch (e) {
+      Fluttertoast.showToast(
+        msg: "Hata: ${e.toString()}",
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.BOTTOM,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+      );
+    } finally {
+      setState(() {
+        _isSending = false;
+      });
+    }
+  }
+
+  // Doğum tarihi formatlama
+  void _formatBirthDate(String value) {
+    if (value.length == 2 || value.length == 5) {
+      if (!_birthDateController.text.endsWith('.')) {
+        _birthDateController.text = value + '.';
+        _birthDateController.selection = TextSelection.fromPosition(
+          TextPosition(offset: _birthDateController.text.length),
+        );
+      }
     }
   }
 
@@ -29,85 +153,90 @@ class _KahveFaliScreenState extends State<KahveFaliScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Kahve Falı",
-            style:
-                TextStyle(fontSize: 24, fontWeight: FontWeight.bold)), // Başlık
-        backgroundColor: Colors.brown.shade600, // Kahverengi tema
-        centerTitle: true, // Başlık ortalanmış
+        title: Text(
+          "Kahve Falı",
+          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        ),
+        backgroundColor: Colors.brown.shade600,
+        centerTitle: true,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(20.0), // Padding artırıldı
+        padding: const EdgeInsets.all(20.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start, // Sol hizalama
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Başlık ve açıklama kısmı
             Text(
               "Kahve falınızı bakmak için aşağıdaki alanları doldurun",
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.w600,
-                color: Colors.brown.shade700, // Kahverengi tonları
+                color: Colors.brown.shade700,
               ),
               textAlign: TextAlign.center,
             ),
             SizedBox(height: 20),
-
-            // Kullanıcıdan ismini ve doğum tarihini alacak alan
-            _buildTextField("Adınız", false),
-            _buildTextField("Doğum Tarihiniz", false),
-
+            _buildTextField(
+              controller: _nameController,
+              labelText: "Adınız",
+              onChanged: (value) {
+                if (value.isNotEmpty) {
+                  _nameController.text =
+                      value[0].toUpperCase() + value.substring(1);
+                  _nameController.selection = TextSelection.fromPosition(
+                    TextPosition(offset: _nameController.text.length),
+                  );
+                }
+              },
+            ),
+            _buildTextField(
+              controller: _birthDateController,
+              labelText: "Doğum Tarihiniz (GG.AA.YYYY)",
+              keyboardType: TextInputType.number,
+              onChanged: _formatBirthDate,
+            ),
             SizedBox(height: 30),
-
-            // Resim seçme butonu
             Center(
               child: ElevatedButton(
-                onPressed: _pickImage, // Resim seçme butonu
+                onPressed: _pickImage,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
                       horizontal: 40.0, vertical: 15.0),
-                  child: Text("Resim Seç",
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  child: Text(
+                    "Resim Seç",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
                 ),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.brown.shade600, // Kahverengi buton
+                  backgroundColor: Colors.brown.shade600,
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12)),
-                  shadowColor: Colors.black.withOpacity(0.3),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                 ),
               ),
             ),
-
             SizedBox(height: 20),
-
-            // Seçilen resimlerin gösterilmesi
-            if (_selectedImages.isNotEmpty)
-              Expanded(
-                child: GridView.builder(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3, // Grid'de 3 sütun olacak
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10,
+            _buildImagePreview(),
+            SizedBox(height: 20),
+            if (_isSending)
+              Center(child: CircularProgressIndicator())
+            else
+              Center(
+                child: ElevatedButton(
+                  onPressed: _sendData,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 40.0, vertical: 15.0),
+                    child: Text(
+                      "Gönder",
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
                   ),
-                  itemCount: _selectedImages.length,
-                  itemBuilder: (context, index) {
-                    return ClipRRect(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.green.shade600,
+                    shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
-                      child: Image.file(
-                        _selectedImages[index],
-                        fit: BoxFit.cover,
-                      ),
-                    );
-                  },
-                ),
-              ),
-            // Seçilen resimler yoksa kullanıcıyı bilgilendiren metin
-            if (_selectedImages.isEmpty)
-              Expanded(
-                child: Center(
-                  child: Text(
-                    "Henüz bir resim seçmediniz.",
-                    style: TextStyle(fontSize: 18, color: Colors.grey.shade600),
+                    ),
                   ),
                 ),
               ),
@@ -118,29 +247,64 @@ class _KahveFaliScreenState extends State<KahveFaliScreen> {
   }
 
   // TextField oluşturma fonksiyonu
-  Widget _buildTextField(String labelText, bool obscureText) {
+  Widget _buildTextField({
+    required TextEditingController controller,
+    required String labelText,
+    TextInputType keyboardType = TextInputType.text,
+    Function(String)? onChanged,
+  }) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 16.0),
       child: TextField(
-        obscureText: obscureText,
+        controller: controller,
+        keyboardType: keyboardType,
+        onChanged: onChanged,
         decoration: InputDecoration(
           labelText: labelText,
-          labelStyle: TextStyle(
-              color:
-                  Colors.brown.shade600), // Etiket rengini kahverengi yapıyoruz
+          labelStyle: TextStyle(color: Colors.brown.shade600),
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12), // Yuvarlatılmış köşeler
-            borderSide:
-                BorderSide(color: Colors.brown.shade400), // Kenarlık rengi
-          ),
-          focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
-            borderSide: BorderSide(
-                color: Colors
-                    .brown.shade600), // Odaklanınca kenarlık rengi değişiyor
           ),
         ),
       ),
     );
+  }
+
+  // Resim önizleme fonksiyonu
+  Widget _buildImagePreview() {
+    if (_selectedImages.isNotEmpty) {
+      return Expanded(
+        child: GridView.builder(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+            crossAxisSpacing: 10,
+            mainAxisSpacing: 10,
+          ),
+          itemCount: _selectedImages.length,
+          itemBuilder: (context, index) {
+            return ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: Image.file(
+                _selectedImages[index],
+                fit: BoxFit.cover,
+              ),
+            );
+          },
+        ),
+      );
+    } else {
+      return Expanded(
+        child: Center(
+          child: Text(
+            "Henüz resim seçmediniz.",
+            style: TextStyle(
+              fontSize: 16,
+              color: Colors.brown.shade600,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+      );
+    }
   }
 }

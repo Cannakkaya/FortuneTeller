@@ -1,4 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Gereken izinler -->
+    <uses-permission android:name="com.android.vending.BILLING" />
+
     <application
         android:label="tarot_app"
         android:name="${applicationName}"

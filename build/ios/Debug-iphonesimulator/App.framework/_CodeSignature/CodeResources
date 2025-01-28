@@ -10,11 +10,11 @@
 		</data>
 		<key>flutter_assets/AssetManifest.bin</key>
 		<data>
-		2s4/1Uh3eHqtdrDg3Lf2UsESpt8=
+		O2kSypCLrVsJuLRhAu4CbHFkw9M=
 		</data>
 		<key>flutter_assets/AssetManifest.json</key>
 		<data>
-		4eut6wS5purwT1AyYpP2aSXNB6U=
+		HrKdNbV30hwsgTrgPl0Lb7oY8Po=
 		</data>
 		<key>flutter_assets/FontManifest.json</key>
 		<data>
@@ -22,11 +22,15 @@
 		</data>
 		<key>flutter_assets/NOTICES.Z</key>
 		<data>
-		4JmEdHo5pyrx6T0hsF/dSC885HE=
+		L3b4BSudRhDY/NKo38woqlYgBmk=
 		</data>
 		<key>flutter_assets/assets/tarot/images/burc.png</key>
 		<data>
 		EiM/GMCFXYDv3SlskfNvU0FwG70=
+		</data>
+		<key>flutter_assets/assets/tarot/images/chat_icon.png</key>
+		<data>
+		vkbouwYNi7HSiTcQrNM+o+oJ5YM=
 		</data>
 		<key>flutter_assets/assets/tarot/images/coffeefortune.png</key>
 		<data>
@@ -44,6 +48,14 @@
 		<data>
 		Of9cR0bNvluirVcefpunx2ENKW8=
 		</data>
+		<key>flutter_assets/assets/tarot/images/settings_icon.png</key>
+		<data>
+		LRwJqNhhLavgLkNboGWfaLP5qE4=
+		</data>
+		<key>flutter_assets/assets/tarot/images/spinwheel.png</key>
+		<data>
+		ry8COvG1AQwROPRU6Es0YwIbVVY=
+		</data>
 		<key>flutter_assets/assets/tarot/images/tarotai.png</key>
 		<data>
 		1F99qTbSHytJVRg/t031bSHa6XQ=
@@ -58,15 +70,23 @@
 		</data>
 		<key>flutter_assets/isolate_snapshot_data</key>
 		<data>
-		qWRCYkB2ANaCGuWJ6K6EbAqreNE=
+		RI3zgJitz0LEL5tMDX7m0Uknm40=
 		</data>
 		<key>flutter_assets/kernel_blob.bin</key>
 		<data>
-		92ygO4qB8nSF4qUQYd380NxgZ10=
+		/eYnKrxtIQS1dRpdItCXEmEmdH8=
 		</data>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
 		<data>
 		Bvk+P1ykE1PGRdktwgwDyz6AOqM=
+		</data>
+		<key>flutter_assets/packages/fluttertoast/assets/toastify.css</key>
+		<data>
+		HVkEhoid+n6bwOYCwZg4DdmGBHY=
+		</data>
+		<key>flutter_assets/packages/fluttertoast/assets/toastify.js</key>
+		<data>
+		v5LMft1C/Ps/+tw6D+zco3p3Urk=
 		</data>
 		<key>flutter_assets/shaders/ink_sparkle.frag</key>
 		<data>
@@ -83,14 +103,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			4AHeOpzpD7K/FAUjo2wB5sTOSJ8xGNocoZCczxCfLws=
+			OrToSqh8lUXvMwFTwFAuQc8kpCQfV9AfWV/+aY6BG0c=
 			</data>
 		</dict>
 		<key>flutter_assets/AssetManifest.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			nW+PS0A2XYEShGZEcVD4WmCQOTHrW9dGqytmIWzc+I4=
+			6M2U2f/zKbxYrgmk8Z+LeTz/D5hx7o1ig+ZxXux4FFA=
 			</data>
 		</dict>
 		<key>flutter_assets/FontManifest.json</key>
@@ -104,7 +124,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			FLyE/vICPSzTSMSxXSmR1F9c9oM8cxB2rdz2+haR8Rg=
+			gi/01Lm2MQXwa3I3DI3QKERC5FxpL/Ihvup5vhm+t0w=
 			</data>
 		</dict>
 		<key>flutter_assets/assets/tarot/images/burc.png</key>
@@ -112,6 +132,13 @@
 			<key>hash2</key>
 			<data>
 			jON1B7BTJi5cMICfmzPErWmLJwuPQ8QDav5465WRm4U=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/tarot/images/chat_icon.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			Xpl4JMPwuvMhDFagwD2tAoQ4du9tBtHvzUB9XrZP0oc=
 			</data>
 		</dict>
 		<key>flutter_assets/assets/tarot/images/coffeefortune.png</key>
@@ -142,6 +169,20 @@
 			q/2Ncq++90G5WjAfeqN8N582htHRawB5mz7Z3DIovNo=
 			</data>
 		</dict>
+		<key>flutter_assets/assets/tarot/images/settings_icon.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			Ch1076pPwjBS5HSh5R45871pCJBX9FIm58lQwiX/SVQ=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/tarot/images/spinwheel.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			z6jS4vjWRvQr9vGPmByqwVcHaD5GKjNw0kee09RiVSw=
+			</data>
+		</dict>
 		<key>flutter_assets/assets/tarot/images/tarotai.png</key>
 		<dict>
 			<key>hash2</key>
@@ -167,14 +208,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			SOJ5rERauzhaCV7eUD78eXv8seogEgSQP/xrVhwDCq8=
+			HMYZHCTzOod6pVdgC+dxVoaB5HzcHkTNLwyAEhCnAfw=
 			</data>
 		</dict>
 		<key>flutter_assets/kernel_blob.bin</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			D1j4YjEPyQ0we+EG5DA5PS13xZ+psQJ7rR9+f0UI0YM=
+			SXVsyRD/GdS5oNnp/jp3R1arzjD78O6Yld83FZfMe0s=
 			</data>
 		</dict>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
@@ -182,6 +223,20 @@
 			<key>hash2</key>
 			<data>
 			Z8RP6Rg7AC553ef2l34piGYcmj5KPF/OloeH79vtgjw=
+			</data>
+		</dict>
+		<key>flutter_assets/packages/fluttertoast/assets/toastify.css</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			abr0T+pbPv0zd7q8FU7xuDv4JjuRAgKox9bnRddRNJ8=
+			</data>
+		</dict>
+		<key>flutter_assets/packages/fluttertoast/assets/toastify.js</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			CRyacJlKIATuArBPER1Aq+QMB7BmhWOZ9YxYcELsKZA=
 			</data>
 		</dict>
 		<key>flutter_assets/shaders/ink_sparkle.frag</key>

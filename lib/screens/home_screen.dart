@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:tarot_app/screens/ai_tarot_screen.dart'; // AiTarotScreen ekranını import ediyoruz
 import 'package:tarot_app/screens/live_tarot_screen.dart'; // LiveTarotScreen ekranını import ediyoruz
 
-// HomeScreen, StatefulWidget olduğu için kullanıcı etkileşimine göre değişebilir
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -13,6 +12,28 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int credits = 50; // Kullanıcının başlangıç kredisi 50 olarak belirlenmiş
   String mailNotification = 'Yeni fal cevabınız var!'; // Mail bildirim mesajı
+
+  // Kredi satın alma işlemi
+  void _buyCredits() {
+    setState(() {
+      credits +=
+          10; // Kullanıcı kredi satın alırken, mevcut krediyi 10 artırıyoruz
+    });
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Kredi başarıyla eklendi!'), // Bildirim mesajı
+        duration: Duration(
+            seconds: 2), // Bildirimin ne kadar süre görüneceğini belirliyoruz
+      ),
+    );
+  }
+
+  // Mail bildirimi güncelleme
+  void _updateMailNotification(String newNotification) {
+    setState(() {
+      mailNotification = newNotification;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,86 +77,98 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage(
-                'assets/tarot/images/mainscreen1.png'), // Arka plan resmi
-            fit: BoxFit.cover, // Resmin tüm ekrana yayılmasını sağlıyoruz
+            image: AssetImage('assets/tarot/images/mainscreen1.png'),
+            fit: BoxFit.cover,
           ),
         ),
         padding: EdgeInsets.all(16.0), // Body kısmına padding ekliyoruz
         child: Column(
-          crossAxisAlignment:
-              CrossAxisAlignment.stretch, // Kolonları tam genişlikte yapıyoruz
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             ElevatedButton(
-              onPressed: () {
-                setState(() {
-                  credits +=
-                      10; // Kullanıcı kredi satın alırken, mevcut krediyi 10 artırıyoruz
-                });
-              },
-              child: Text("Kredi Satın Al"), // Kredi satın alma butonu
+              onPressed: _buyCredits,
+              child: Text("Kredi Satın Al"),
             ),
-            SizedBox(height: 20), // Buton ve grid arasında boşluk
+            SizedBox(height: 20),
             Expanded(
               child: GridView.count(
-                crossAxisCount: 2, // Grid'deki her satırda 2 buton olacak
-                crossAxisSpacing: 10, // Butonlar arasındaki yatay boşluk
-                mainAxisSpacing: 10, // Butonlar arasındaki dikey boşluk
+                crossAxisCount: 2,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
                 children: [
-                  // Yapay Zeka ile Tarot Falı butonunu oluşturuyoruz
                   _buildGridButton(
                     title: "Yapay Zeka ile Tarot Falı",
                     color: Colors.blue,
-                    imagePath:
-                        'assets/tarot/images/tarotcardsbg.png', // Resmin yolu
+                    imagePath: 'assets/tarot/images/tarotcardsbg.png',
                     onTap: () {
-                      Navigator.pushNamed(
-                          context, '/aiTarot'); // AiTarot ekranına geçiş
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => AiTarotScreen()),
+                      );
                     },
                   ),
-                  // Canlı Tarot Falı butonunu oluşturuyoruz
                   _buildGridButton(
                     title: "Canlı Tarot Falı",
                     imagePath: 'assets/tarot/images/livetarot.png',
                     color: Colors.green,
-                    // icon: Icons.live_tv, // Simge ikonu
                     onTap: () {
-                      Navigator.pushNamed(
-                          context, '/liveTarot'); // LiveTarot ekranına geçiş
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => LiveTarotScreen()),
+                      );
                     },
                   ),
-                  // Kahve Falı butonunu oluşturuyoruz
                   _buildGridButton(
                     title: "Kahve Falı",
-                    imagePath:
-                        'assets/tarot/images/coffeefortune.png', // Resmin yolu
+                    imagePath: 'assets/tarot/images/coffeefortune.png',
                     color: Colors.brown,
-                    // icon: Icons.coffee, // Simge ikonu
                     onTap: () {
-                      Navigator.pushNamed(
-                          context, '/kahveFali'); // KahveFali ekranına geçiş
+                      Navigator.pushNamed(context, '/kahveFali');
                     },
                   ),
-                  // Günlük Burç Yorumları butonunu oluşturuyoruz
                   _buildGridButton(
                     title: "Günlük Burç Yorumları",
                     imagePath: 'assets/tarot/images/burc.png',
                     color: Colors.deepPurple,
-                    // icon: Icons.star, // Simge ikonu
                     onTap: () {
-                      Navigator.pushNamed(context,
-                          '/burcYorumlari'); // BurcYorumlari ekranına geçiş
+                      Navigator.pushNamed(context, '/burcYorumlari');
+                    },
+                  ),
+                  // Chat Button
+                  _buildGridButton(
+                    title: "Chat",
+                    imagePath:
+                        'assets/tarot/images/chat_icon.png', // Ensure you have an appropriate icon
+                    color: Colors.orange,
+                    onTap: () {
+                      Navigator.pushNamed(
+                          context, '/chat'); // Navigate to the chat screen
+                    },
+                  ),
+                  // Settings Button (Çark)
+                  _buildGridButton(
+                    title: "Ayarlar",
+                    imagePath:
+                        'assets/tarot/images/settings_icon.png', // Çark ikonu
+                    color: Colors.blueGrey,
+                    onTap: () {
+                      Navigator.pushNamed(context, '/settings');
                     },
                   ),
                 ],
               ),
             ),
-            SizedBox(height: 10), // Alt kısmındaki metin için boşluk
-            // Kullanıcıya yeni fal cevabı olduğunu bildiren metin
-            Text(
-              mailNotification,
-              style: TextStyle(fontSize: 18.0, color: Colors.red),
-              textAlign: TextAlign.center, // Mesajı ortalayarak yazıyoruz
+            SizedBox(height: 10),
+            AnimatedOpacity(
+              opacity: mailNotification.isEmpty ? 0 : 1,
+              duration: Duration(milliseconds: 300),
+              child: Text(
+                mailNotification,
+                style: TextStyle(fontSize: 18.0, color: Colors.red),
+                textAlign: TextAlign.center,
+              ),
             ),
           ],
         ),
@@ -143,52 +176,54 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  // Grid içerisindeki her buton için özel bir widget oluşturuyoruz
   Widget _buildGridButton({
-    required String title, // Buton başlığı
-    Color? color, // Butonun arka plan rengi
-    IconData? icon, // Buton ikonu
-    String? imagePath, // Resim yolu
-    required VoidCallback onTap, // Buton tıklama işlemi
+    required String title,
+    Color? color,
+    IconData? icon,
+    String? imagePath,
+    required VoidCallback onTap,
   }) {
     return GestureDetector(
-      onTap: onTap, // Butona tıklama işlemi
-      child: Container(
+      onTap: onTap,
+      child: AnimatedContainer(
+        duration: Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
         decoration: BoxDecoration(
-          color: color ?? Colors.grey, // Arka plan rengini belirliyoruz
-          borderRadius:
-              BorderRadius.circular(10), // Butonun köşelerini yuvarlatıyoruz
+          color: color ?? Colors.grey,
+          borderRadius: BorderRadius.circular(20),
           image: imagePath != null
               ? DecorationImage(
                   image: AssetImage(imagePath),
-                  fit: BoxFit.cover, // Resmi butona uygun şekilde kaplatıyoruz
+                  fit: BoxFit.cover,
                 )
               : null,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.4),
+              offset: Offset(0, 4),
+              blurRadius: 10,
+            ),
+          ],
         ),
         child: Column(
-          mainAxisAlignment:
-              MainAxisAlignment.center, // Buton içeriğini ortalıyoruz
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            if (icon != null)
-              Icon(icon,
-                  size: 40, color: Colors.white), // İkon varsa gösteriyoruz
+            if (icon != null) Icon(icon, size: 40, color: Colors.white),
             if (imagePath != null)
               SizedBox(
                 height: 40,
                 width: 40,
-                child: Image.asset(imagePath), // Resim varsa gösteriyoruz
+                child: Image.asset(imagePath),
               ),
-            SizedBox(
-                height:
-                    10), // Buton başlığı ile diğer içerik arasına boşluk ekliyoruz
-            // Buton başlığını gösteriyoruz
+            SizedBox(height: 10),
             Text(
               title,
               style: TextStyle(
-                color: Colors.white, // Başlık rengini beyaz yapıyoruz
-                fontSize: 16, // Başlık font boyutunu belirliyoruz
+                color: Colors.white,
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
               ),
-              textAlign: TextAlign.center, // Başlık metnini ortalıyoruz
+              textAlign: TextAlign.center,
             ),
           ],
         ),
