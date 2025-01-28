@@ -1,5 +1,6 @@
-import Flutter
 import UIKit
+import Flutter
+import Firebase // Firebase modülünü import et
 
 @main
 @objc class AppDelegate: FlutterAppDelegate {
@@ -7,7 +8,12 @@ import UIKit
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
+    // Firebase'i başlatma
+    FirebaseApp.configure()
+
+    // Flutter plugin'lerini kaydet
     GeneratedPluginRegistrant.register(with: self)
+
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
 }
